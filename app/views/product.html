@@ -9,7 +9,7 @@
             <p ng-if="!model.lastBid">No Bid</p>
         </div>
         <div>
-        <input type="number" step="{{model.inc}}" min={{minimumBid}} ng-model="bidObject.price" ng-change="validataBid()">
+        <input ng-if="!navigate" type="number" step="{{model.inc}}" min={{minimumBid}} ng-model="bidObject.price" ng-change="validataBid()">
         <div class="validation-error" ng-if="error">{{error}}</div>
         </div>
         <button type="button" ng-if="!navigate" ng-click="addBid(productListCtrl.model)" class="btn btn-primary btn-xs btn-update btn-add-card" ng-disabled="error">Bid 1</button>

@@ -29,18 +29,7 @@ angular
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
-        controllerAs: 'dashboard',
-        resolve:{
-          getProducts : function(remoteCall){
-            return remoteCall.get('products');
-           //return $http.get('http://localhost:5000/api/products');
-              // .then(response => {
-              //   return response;
-              //   this.data = response.data;
-              //   this.socket.syncUpdates('thing', this.awesomeThings);
-              // });
-          }
-        }
+        controllerAs: 'dashboard'
       })
       .when('/products/:productName', {
         templateUrl: 'views/products.html',

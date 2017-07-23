@@ -8,7 +8,7 @@
  * Service in the sampleAngularApp.
  */
 angular.module('sampleAngularApp')
-  .service('remoteCall', function ($q, $http, $rootScope, $timeout) {
+  .factory('remoteCall', function ($q, $http, $rootScope, $timeout) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     //  var endpointUrl = '//172.16.0.35/api';

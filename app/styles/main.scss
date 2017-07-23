@@ -66,18 +66,58 @@ body {
     margin-top: 28px;
   }
 }
-.validation-error {
-    margin: 10px 0px;
-    background: #f9d6d6;
-    padding: 5px 7px;
-    border: 1px solid #f76262;
-    border-radius: 5px;
+.product-card {
+    .validation-error {
+      margin: 10px 0px;
+      background: #f9d6d6;
+      padding: 5px 7px;
+      border: 1px solid #f76262;
+      border-radius: 5px;
+    }
+    .bid-detail {
+        margin: 10px 0px;
+        font-weight: 100;
+        font-size: 38px;
+    }
+    .well {
+        padding: 5px 10px;
+        margin-bottom: 0px;
+    }
+    .btn.btn-bid-now {
+      background: #f76262;
+      color: white;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+    .bid-user {
+      font-size: 18px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .no-bid {
+      margin-bottom: 25px;
+    }
+}
+
+.activites-table {
+  .header {
+    font-size: 20px;
+  }
+  .media-photo {
+    width: 65px;
+  }
+  .summary {
+    margin-bottom: 0px;
+    font-weight: 100;
+    font-size: 28px;
+  }
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 730px;
+      max-width: 100%;
   }
 
   /* Remove the padding we set earlier */

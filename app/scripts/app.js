@@ -31,8 +31,9 @@ angular
         controller: 'DashboardCtrl',
         controllerAs: 'dashboard',
         resolve:{
-          getProducts : function($http){
-           return $http.get('http://localhost:5000/api/products');
+          getProducts : function(remoteCall){
+            return remoteCall.get('products');
+           //return $http.get('http://localhost:5000/api/products');
               // .then(response => {
               //   return response;
               //   this.data = response.data;
@@ -46,8 +47,9 @@ angular
         controller: 'ProductsCtrl',
         controllerAs: 'products',
         resolve:{
-          getProductsDetails : function($http,$route){
-            return $http.get('http://localhost:5000/api/products/'+$route.current.pathParams.productName);
+          getProductsDetails : function($route,remoteCall){
+            return remoteCall.get('products/'+$route.current.pathParams.productName);
+            //return $http.get('http://localhost:5000/api/products/'+$route.current.pathParams.productName);
           }
         }
       })

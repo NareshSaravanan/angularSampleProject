@@ -10,7 +10,7 @@
 angular.module('sampleAngularApp')
   .service('login', function ($uibModal,$window,$rootScope,$location) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    var openModel = function(){
+    var openModel = function(event){
             var modalInstance = $uibModal.open({
             animation: true,
             backdrop: 'static',
@@ -30,6 +30,7 @@ angular.module('sampleAngularApp')
 
           modalInstance.result.then(function (selectedItem) {
            // dss $ctrl.selected = selectedItem;
+            //$(this).trigger(event);
           }, function (data) {
             console.log(data);
           });

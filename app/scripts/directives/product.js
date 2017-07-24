@@ -7,13 +7,13 @@
  * # product
  */
 angular.module('sampleAngularApp')
-    .directive('product', function($http, $location, remoteCall) {
+    .directive('product', function($http, $location, remoteCall,$rootScope) {
         return {
             templateUrl: 'views/product.html',
             restrict: 'E',
             scope: {
                 model: '=',
-                navigate: "=",
+                navigate: "="
 
             },
             link: function postLink(scope, element, attrs) {
@@ -21,17 +21,18 @@ angular.module('sampleAngularApp')
                 scope.updateBidObject = function() {
                     scope.minimumBid = scope.model.lastBid ? scope.model.lastBid.price + scope.model.inc : scope.model.rPrice;
                     scope.bidObject = {
-                        user: scope.model.user || "user",
+                        user: $rootScope.userName,
                         price: scope.minimumBid
                     };
                 };
                 scope.updateBidObject();
                 scope.addBid = function() {
+                     
                     remoteCall.put('products/' + this.model.name + '/bid', {
-                        user: this.model.user || "syed",
+                        user: $rootScope.userName,
                         price: this.bidObject.price
                     }).then(response => {
-                        scope.model.lastBid = response.data.lastBid;
+                        scope.model = response.data;
                         this.updateBidObject(scope);
                     });
                 };

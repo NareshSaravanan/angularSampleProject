@@ -17,16 +17,6 @@ angular
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
         controllerAs: 'dashboard',
@@ -54,12 +44,12 @@ angular
     // register listener to watch route changes
     $rootScope.userName = $window.localStorage.getItem("userName");
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-      if(next.$$route.authentication){
+      if(next.$$route && next.$$route.authentication){
           var userName = $window.localStorage.getItem("userName");
           if(!userName){
             $rootScope.userName = null;
             event.preventDefault();
-            login.openModel();
+            login.openModel(event);
             $location.path("/dashboard");
           }else{
             $rootScope.userName = userName;

@@ -12,7 +12,7 @@ angular
   .module('sampleAngularApp', [
     'ngCookies',
     'ngResource',
-    'ngRoute'
+    'ngRoute','ui.bootstrap'
   ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
@@ -29,12 +29,14 @@ angular
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardCtrl',
-        controllerAs: 'dashboard'
+        controllerAs: 'dashboard',
+        authentication:false
       })
       .when('/products/:productName', {
         templateUrl: 'views/products.html',
         controller: 'ProductsCtrl',
         controllerAs: 'products',
+        authentication:true,
         resolve:{
           getProductsDetails : function($route,remoteCall){
             return remoteCall.get('products/'+$route.current.pathParams.productName);
@@ -46,4 +48,22 @@ angular
         redirectTo: '/'
       });
       $locationProvider.hashPrefix('');
-  });
+  })
+   .run( function($rootScope, $location,$window,login) {
+
+    // register listener to watch route changes
+    $rootScope.userName = $window.localStorage.getItem("userName");
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if(next.$$route.authentication){
+          var userName = $window.localStorage.getItem("userName");
+          if(!userName){
+            $rootScope.userName = null;
+            event.preventDefault();
+            login.openModel();
+            $location.path("/dashboard");
+          }else{
+            $rootScope.userName = userName;
+          }
+      }        
+    });
+  })

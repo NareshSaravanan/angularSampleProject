@@ -8,10 +8,19 @@
  * Controller of the sampleAngularApp
  */
 angular.module('sampleAngularApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope,$rootScope,login) {
+    $scope.isuserLoggedIn = function(){
+    	var userName = $rootScope.userName;
+    	if(userName){
+    		return userName;
+    	}
+
+    	return false;
+    }
+    $scope.logout = function(){
+        login.logout();
+    }
+    $scope.$watch('$root.userName', function(newNames, oldNames) {
+	 	$scope.value = $scope.isuserLoggedIn();
+	});
   });
